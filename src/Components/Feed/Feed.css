@@ -1,0 +1,11 @@
+:root {
+
+}
+
+.feed {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    min-height: 30rem;
+}
+
