@@ -1,8 +1,8 @@
 import React from 'react';
 import './Feed_head.css';
 import { Badge } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles/index.js';
-import Feed_filter from './Feed_filter/Feed_filter.js';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Feed_filter from './Feed_filter/Feed_filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, decrement } from '../../../store/unreadEmailsSlice';
 
@@ -35,7 +35,6 @@ const Feed_head = () => {
           <div className="feed-head__right-side">
               <Feed_filter/>
           </div>
-          <button onClick={()=> {dispatch(increment(21))}}>test</button>
       </div>
     );
   }

@@ -12,8 +12,8 @@ const unreadEmailsSlice = createSlice({
         increment(state, action) {
             state.count = state.count + action.payload;
         },
-        decrement(state) {
-            state.count = state.count + 1;
+        unshiftToUnread(state) {
+            state.emails = state.emails.unshift(action.payload);
         }
     }
 })

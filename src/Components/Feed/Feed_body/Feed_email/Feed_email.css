@@ -19,6 +19,10 @@
     border-style: solid;
 }
 
+.feed-email {
+    border-left: 3px solid transparent;
+}
+
 .feed-email__unread {
     border-left: 3px solid var(--feed-email--blue);
     background-color: var(--feed-search--blue-bg);
