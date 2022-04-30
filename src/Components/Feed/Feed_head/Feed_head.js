@@ -4,7 +4,7 @@ import { Badge } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles/index.js';
 import Feed_filter from './Feed_filter/Feed_filter.js';
 import { useDispatch, useSelector } from 'react-redux';
-import lamba from './Feed_api/api.json'
+import { increment, decrement } from '../../../store/unreadEmailsSlice';
 
 
 
@@ -20,10 +20,8 @@ const FeedHeadTheme = createTheme({
 
 
 const Feed_head = () => {
-    
+  const unreadEmailsCount = useSelector(state => state.unreadEmails.count);
   const dispatch = useDispatch();
-  const unreadEmailsCount = useSelector(state => state.unreadEmailsCount);
-
 
 
     return (

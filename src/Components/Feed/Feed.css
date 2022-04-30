@@ -9,8 +9,9 @@
 .feed {
     display: flex;
     flex-direction: column;
-    width: 27rem;
-    min-height: 30rem;
+    flex-basis: 30rem;
+    flex-grow: 1;
+    min-height: 40rem;
     border: 1px solid var(--feed--separator-color);
     background-color: #FFFFFF;
 }

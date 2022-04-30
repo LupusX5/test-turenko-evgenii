@@ -2,23 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './Components/App/App';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux'
-
-
-const defaultState = {
-    unreadEmailsCount: 73
-}
-
-const reducer = (state = defaultState, action) => {
-    switch(action.type) {
-
-
-        default:
-            return state
-    }
-}
-
-const store = createStore(reducer)
+import store from './store'
+import { StoreContext } from './store/context';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
