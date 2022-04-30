@@ -3,11 +3,8 @@ import './Feed_email.css';
 
 
 const Feed_email = ({from, time, subject, attachment, isRead}) => {
-    const highlighter = (trigger) => {
-        if(trigger === false) {
-            
-        }
-    }
+    
+    
 
     return (
       <div className={isRead?"feed-email":"feed-email__unread"}>

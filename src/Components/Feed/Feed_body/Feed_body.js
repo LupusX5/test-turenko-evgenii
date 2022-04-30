@@ -12,14 +12,6 @@ const Feed_body = () => {
 
     const [emails, setEmails] = useState(null)
 
-    // const mapper = (array) => {
-    //   if(array!==null) {
-    //     return array.map((item, id)=> {
-    //       return <div key={id}>{item.subject}</div>
-    //     })
-    //   }
-    // }
-
 
     const mapper = (array) => {
       if(array!==null) {

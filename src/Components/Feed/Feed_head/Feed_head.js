@@ -35,6 +35,7 @@ const Feed_head = () => {
           <div className="feed-head__right-side">
               <Feed_filter/>
           </div>
+          <button onClick={()=> {dispatch(increment(21))}}>test</button>
       </div>
     );
   }
