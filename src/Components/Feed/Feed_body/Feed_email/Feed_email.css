@@ -1,0 +1,46 @@
+
+:root {
+    --feed-email--font-color: #3B3D3F;
+    --feed-email--gray: #F4F5F5;
+    --feed-email--red: #FC3401;
+    --feed-email--blue: #03B9ED;
+    --feed-search--blue-bg: #EEFAFF;
+    --feed-email--separator-color: #DBE4EB;
+}
+
+
+
+.feed-email, .feed-email__unread {
+    display: flex;
+    padding: 20px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-width: 0px 0px 1px 0px;
+    border-color: var(--feed-email--separator-color);
+    border-style: solid;
+}
+
+.feed-email__unread {
+    border-left: 3px solid var(--feed-email--blue);
+    background-color: var(--feed-search--blue-bg);
+}
+
+.feed-email__inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    cursor: pointer;
+}
+
+.feed-email__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.feed_email__from {
+    font-weight: 600;
+}
+
+.feed-email__bottom {
+    margin-top: 10px;
+}

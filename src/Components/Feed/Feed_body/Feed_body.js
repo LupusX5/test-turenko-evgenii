@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Feed_body.css';
 import { increment, decrement } from '../../../store/unreadEmailsSlice';
+import Feed_email from './Feed_email/Feed_email';
 
 
 const Feed_body = () => {
@@ -11,10 +12,19 @@ const Feed_body = () => {
 
     const [emails, setEmails] = useState(null)
 
+    // const mapper = (array) => {
+    //   if(array!==null) {
+    //     return array.map((item, id)=> {
+    //       return <div key={id}>{item.subject}</div>
+    //     })
+    //   }
+    // }
+
+
     const mapper = (array) => {
       if(array!==null) {
-        return array.map((item, id)=> {
-          return <div key={id}>{item.subject}</div>
+         return array.map((item, id)=> {
+          return <Feed_email key={id} isRead={item.isReaded} from={item.from} subject={item.subject}  time={item.date}/>
         })
       }
     }
@@ -36,6 +46,9 @@ const Feed_body = () => {
     return (
       <div className="feed-body">
           {mapper(emails)}
+          {/* {emails.map((item)=> {
+          <Feed_email key={item.id} from={item.from} subject={item.subject} attachment={item.attachements} time={item.date}/>
+        })} */}
       </div>
     );
   }
