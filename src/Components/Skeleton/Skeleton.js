@@ -1,5 +1,5 @@
 import React from 'react';
-import Email_body from '../Email_body/Email_body.js';
+import Email_box from '../Email_box/Email_box.js';
 import Feed from '../Feed/Feed.js';
 import './Skeleton.css';
 
@@ -9,7 +9,7 @@ const Skeleton = () => {
     return (
       <div className="skeleton">
         <Feed/>
-        <Email_body/>
+        <Email_box/>
       </div>
     );
   }

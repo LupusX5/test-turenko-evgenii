@@ -18,7 +18,7 @@ const Feed_body = () => {
 
     return (
       <div className="feed-body">
-          sajdk
+          
           
       </div>
     );

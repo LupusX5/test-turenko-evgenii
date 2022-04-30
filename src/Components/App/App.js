@@ -1,5 +1,6 @@
 import React from 'react';
 import Skeleton from '../Skeleton/Skeleton';
+import './App.css'
 
 
 const App = () => {

@@ -1,25 +1,20 @@
 import React from 'react';
 import './Feed_search.css';
+import { Input } from '@mui/material';
+import { InputAdornment } from '@mui/material';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import searchIcon from './icons/search-icon/icons8-search-50.svg'
 
 
 const Feed_search = () => {
 
-    // replace by a different url if this one will be expired
-    const apiUrl = 'https://8a7a7925-028a-4dcb-b408-785a0ddfec2a.mock.pstmn.io/emails'
-  
-    const fetchEmails = async(url) => {
-      const response = await fetch(url);
-      const emailsList = await response.json();
-      console.log(emailsList)
-      return emailsList;
-    };
-  
-    fetchEmails(apiUrl)
 
     return (
       <div className="feed-search">
-          sajdk
-          
+          <div className='feed-search__inner'>
+              <input className='feed-search__search' placeholder='Search'/>
+              <img className='feed-search__icon' src={searchIcon}/>
+          </div>
       </div>
     );
   }

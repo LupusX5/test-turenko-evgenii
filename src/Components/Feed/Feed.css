@@ -1,11 +1,17 @@
 :root {
-
+    --feed--font-color: #3B3D3F;
+    --feed--gray: #F4F5F5;
+    --feed--red: #FC3401;
+    --feed--blue: #03B9ED;
+    --feed--separator-color: #DBE4EB;
 }
 
 .feed {
     display: flex;
     flex-direction: column;
-    width: 30rem;
+    width: 27rem;
     min-height: 30rem;
+    border: 1px solid var(--feed--separator-color);
+    background-color: #FFFFFF;
 }
 
