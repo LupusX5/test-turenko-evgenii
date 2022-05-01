@@ -81,10 +81,18 @@
     min-height: 25rem;
     max-height: 30rem;
     background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .email-content-main-container__footer {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
     background-color: var(--email-content--gray);
+    border-top: 1px solid var(--email-box--separator-color);
+
 }

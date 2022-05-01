@@ -2,19 +2,22 @@ import React, { useState } from 'react';
 import './Feed_email.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmailBody } from '../../../../store/emailContentSlice';
+import { viewEmailContent } from '../../../../store/emailStorageSlice';
 
 
 
-const Feed_email = ({from, time, subject, attachment, isRead}) => {
+const Feed_email = ({from, time, subject, attachment, isRead, index}) => {
     
     const [read, setRead] = useState(isRead)
 
     const emailContentBody = useSelector(state => state.emailContent.content);
+    const emailIndex = useSelector(state => state.emailStorage.currentEmail);
     const dispatch = useDispatch();
 
     const readMessage = () => {
         setRead(true);
         dispatch(addEmailBody('djkfsdkfs'))
+        dispatch(viewEmailContent(index))
     }
 
     return (

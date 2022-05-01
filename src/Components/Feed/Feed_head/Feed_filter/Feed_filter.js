@@ -1,11 +1,7 @@
 import React from 'react';
 import { Select } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles/index.js';
-import InputLabel from '@mui/material/InputLabel/index.js';
-import MenuItem from '@mui/material/MenuItem/index.js';
-import FormHelperText from '@mui/material/FormHelperText/index.js';
-import FormControl from '@mui/material/FormControl/index.js';
-import lamba from './images/bgdesk.jpg'
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 import './Feed_filter.css'
 
 
@@ -23,7 +19,7 @@ const Feed_filter = () => {
 
     return (
       <React.Fragment>
-      <FormControl sx={{ m: 1, minWidth: 120}} size='small'>
+      <FormControl sx={{ m: 1, minWidth: 110}} size='small'>
         <Select
           value={option}
           onChange={handleChange}

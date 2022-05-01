@@ -33,6 +33,21 @@ const Email_content = () => {
         fontSize: 12,
     })
 
+    const ButtonBlueLowerRightCornerRounded = styled(Button)({
+        borderTopRightRadius:0,
+        borderTopLeftRadius:0,
+        borderBottomLeftRadius:0,
+        backgroundColor: '#03B9ED',
+        color:'#F4F5F5',
+        textTransform: 'none',
+        fontFamily:[
+            'Arial',
+            'Helvetica',
+            'sans-serif'
+        ],
+        fontSize: 12,
+    })
+
 
     const ButtonGreyOutlined = styled(Button)({
         backgroundColor: 'transparent',
@@ -72,7 +87,8 @@ const Email_content = () => {
               <div className='email-content__main-container email-content-main-container'>
                     <div className='email-content-main-container__text'></div>
                     <div className='email-content-main-container__footer'>
-                        <div></div>
+                        <div className='email-content-main-container__attachments'></div>
+                        <ButtonBlueLowerRightCornerRounded>Reply</ButtonBlueLowerRightCornerRounded>
                     </div>
               </div>
           </div>

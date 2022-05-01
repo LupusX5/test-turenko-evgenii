@@ -25,7 +25,7 @@ const Feed_body = () => {
       if(array!==null) {
         console.log(array.length)
          return array.map((item, id)=> {
-          return <Feed_email key={id} isRead={item.isReaded} from={item.from} subject={item.subject}  time={item.date}/>
+          return <Feed_email key={id} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject}  time={item.date}/>
         })
       } 
     }
