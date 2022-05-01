@@ -29,7 +29,7 @@ const Feed_head = () => {
           <div className="feed-head__left-side">
               <p className="feed-head__title">Inbox</p> 
               <ThemeProvider theme={FeedHeadTheme}>
-                 <Badge color='primary' badgeContent={unreadEmailsCount.toString()} max={999}></Badge>
+                 <Badge color='primary' badgeContent={unreadEmailsCount.toString()} max={99}></Badge>
               </ThemeProvider>
           </div>
           <div className="feed-head__right-side">

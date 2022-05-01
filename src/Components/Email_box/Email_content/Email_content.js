@@ -3,9 +3,6 @@ import './Email_content.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
-import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 
 
 
@@ -65,7 +62,19 @@ const Email_content = () => {
           </div>
           <div className='email-content__body'>
               <h3 className='email-content__from'>From Person</h3>
-                <div className='email-contetn__tags'></div>
+              <div className='email-content__tags'>
+                  <p className='email-content__tags-title'>Tags</p>
+                  <ul className='email-content__tags-list'>
+                      <li className='email-content__tag'>tag1</li>
+                      <li className='email-content__tag'>tag2</li>
+                  </ul>
+              </div>
+              <div className='email-content__main-container email-content-main-container'>
+                    <div className='email-content-main-container__text'></div>
+                    <div className='email-content-main-container__footer'>
+                        <div></div>
+                    </div>
+              </div>
           </div>
       </div>
     );

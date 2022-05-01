@@ -15,7 +15,7 @@ import './Feed_filter.css'
 
 const Feed_filter = () => {
     
-    const [option, setOption] = React.useState('');
+    const [option, setOption] = React.useState(0);
 
     const handleChange = (event) => {
       setOption(event.target.value);
@@ -23,17 +23,6 @@ const Feed_filter = () => {
 
     return (
       <React.Fragment>
-        {/* <div className="feed-filter">
-          <div className="feed-filter__button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <span>Filter by</span>
-           <div className='feed-filter__arrows'>^</div>
-          </div>
-          <div id="myDropdown" class="dropdown-content">
-            <div>Home</div>
-            <div>About</div>
-            <div>Contact</div>
-          </div>
-        </div> */}
       <FormControl sx={{ m: 1, minWidth: 120}} size='small'>
         <Select
           value={option}
@@ -41,7 +30,7 @@ const Feed_filter = () => {
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
         >
-          <MenuItem value="">
+          <MenuItem disabled value={0}>
             <em>Filter by</em>
           </MenuItem>
           <MenuItem value={10}>Inbox</MenuItem>

@@ -33,3 +33,58 @@
 .email-content__from {
     margin: 0px;
 }
+
+.email-content__tags {
+    background-color: #FFFFFF;
+    display: flex; 
+    flex-direction: row;
+    margin-top: 1.667rem;
+    padding: 10px 10px;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.email-content__tags, .email-content__main-container {
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 1px 5px 1px rgba(59,61,63,0.34); 
+    box-shadow: 0px 1px 5px 1px rgba(59,61,63,0.34);
+}
+
+.email-content__tags-title {
+    margin: 0px;
+}
+
+.email-content__tags-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 10px;
+    padding: 0px;
+}
+
+.email-content__tag {
+    padding: 3px 10px;
+    -webkit-box-shadow: 0px 1px 5px 1px rgba(59,61,63,0.14); 
+    box-shadow: 0px 1px 5px 1px rgba(59,61,63,0.14);
+    border: 1px solid var(--email-content--separator-color);
+    border-radius: 3px;
+}
+
+.email-content__tag:not(:first-of-type){
+    margin-left: 10px;
+}
+
+
+.email-content__main-container {
+    margin-top: 1.667rem;
+    min-height: 25rem;
+    max-height: 30rem;
+    background-color: #FFFFFF;
+}
+
+.email-content-main-container__footer {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--email-content--gray);
+}
