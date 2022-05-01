@@ -8,7 +8,11 @@ import { inboxSetter } from '../../../store/emailStorageSlice';
 
 const Feed_body = () => {
 
-    const emailStorageList = useSelector(state => state.emailStorage.inbox);
+    const emailStorageListDefault = useSelector(state => state.emailStorage.inbox);
+    const emailStorageListDeleted = useSelector(state => state.emailStorage.deleted);
+    const emailStorageListSpam = useSelector(state => state.emailStorage.spam);
+    const emailStorageListCurrentFolder = useSelector(state => state.emailStorage.currentFolder);
+    
     const dispatch = useDispatch();
 
     // replace by a different url if this one will be expired
@@ -17,10 +21,28 @@ const Feed_body = () => {
 
     const [emails, setEmails] = useState(null)
 
+    const getCurrentFolder = (folder) => {
+            /* 
+                folders: 
+                0 – filter by
+                10 – inbox
+                20 – spam
+                30 – deleted
+            */
+      if(folder === (0 || 10)) {
+        return emailStorageListDefault;
+      } else if(folder === 20) {
+        return emailStorageListSpam;
+      } else if(folder === 30) {
+        return emailStorageListDeleted;
+      } else {
+        return emailStorageListDefault;
+      }
+    }
 
     const mapper = (array) => {
       if(array.length===0) {
-        return <div className='feed-email__alert'>Emails are being loaded...</div>
+        return <div className='feed-email__alert'>Inbox folder is empty</div>
       } else
       if(array!==null) {
          return array.map((item, id)=> {
@@ -47,6 +69,7 @@ const Feed_body = () => {
       }
 
       dispatch(inboxSetter(array))
+      
     }
 
 
@@ -54,7 +77,8 @@ const Feed_body = () => {
       const asyncStack = async() => {
         const trigger = await fetchEmails(apiUrl)
         const target = await modifyFetchedEmails(trigger)
-
+        
+        setTimeout(asyncStack, 90000)
         return target
       }
 
@@ -64,7 +88,7 @@ const Feed_body = () => {
 
     return (
       <div className="feed-body">
-          {mapper(emailStorageList)}
+          {mapper(getCurrentFolder(emailStorageListCurrentFolder))}
       </div>
     );
   }

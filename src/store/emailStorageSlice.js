@@ -22,9 +22,19 @@ const emailStorageSlice = createSlice({
         inbox: [],
         spam: [],
         deleted: [],
-        currentFolder: 'inbox' // available folders: inbox/spam/deleted. Default folder: inbox.
+        currentFolder: 0 // available folders: inbox/spam/deleted. Default folder: inbox.
     },
     reducers: {
+        setCurrentFolder(state, action){
+            /* 
+                folders: 
+                payload = 0 – filter by
+                payload = 10 – inbox
+                payload = 20 – spam
+                payload = 20 – deleted
+            */
+            state.currentFolder = action.payload
+        },
         inboxSetter(state, action) {
             // state.inbox = action.payload;
             state.inbox.unshift(...action.payload)
@@ -68,6 +78,7 @@ const emailStorageSlice = createSlice({
             if(spamTargetCount.length===0) {
                 state.spam.unshift(...state.currentEmail[0])
             }
+            console.log(current(state.spam))
             removeByAttr(state.inbox, 'index', targetIndex)
             state.currentEmailIndex=0;
             state.currentEmail=[];
@@ -80,4 +91,4 @@ const emailStorageSlice = createSlice({
 
 export default emailStorageSlice.reducer;
 
-export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, sendToDeleted, sendToSpam} = emailStorageSlice.actions;
+export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, sendToDeleted, sendToSpam, setCurrentFolder} = emailStorageSlice.actions;

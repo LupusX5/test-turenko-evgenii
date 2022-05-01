@@ -2,19 +2,21 @@ import React from 'react';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import './Feed_filter.css'
-
+import './Feed_filter.css';
+import { setCurrentFolder } from '../../../../store/emailStorageSlice';
+import { useDispatch } from 'react-redux';
 
   
 
 
 
 const Feed_filter = () => {
-    
+    const dispatch = useDispatch();
     const [option, setOption] = React.useState(0);
 
     const handleChange = (event) => {
       setOption(event.target.value);
+      dispatch(setCurrentFolder(event.target.value))
     };
 
     return (

@@ -22,8 +22,12 @@ const Email_content = ({index, from, body, tag, attachements}) => {
             'Arial',
             'Helvetica',
             'sans-serif'
-        ],
+        ].join(','),
         fontSize: 12,
+        '&:hover': {
+            backgroundColor: '#FC340133',
+            color:'#FC3401'
+        }
     })
 
     const ButtonBlue = styled(Button)({
@@ -34,8 +38,12 @@ const Email_content = ({index, from, body, tag, attachements}) => {
             'Arial',
             'Helvetica',
             'sans-serif'
-        ],
+        ].join(','),
         fontSize: 12,
+        '&:hover': {
+            backgroundColor: '#daedf2',
+            color:'#03B9ED'
+        }
     })
 
     const ButtonBlueLowerRightCornerRounded = styled(Button)({
@@ -49,8 +57,12 @@ const Email_content = ({index, from, body, tag, attachements}) => {
             'Arial',
             'Helvetica',
             'sans-serif'
-        ],
+        ].join(','),
         fontSize: 12,
+        '&:hover': {
+            backgroundColor: '#daedf2',
+            color:'#03B9ED'
+        }
     })
 
 
@@ -63,8 +75,11 @@ const Email_content = ({index, from, body, tag, attachements}) => {
             'Arial',
             'Helvetica',
             'sans-serif'
-        ],
+        ].join(','),
         fontSize: 12,
+        '&:hover': {
+            borderColor:'#3B3D3F'
+        }
     })
 
     return (
