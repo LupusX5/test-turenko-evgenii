@@ -53,8 +53,8 @@ const emailStorageSlice = createSlice({
         emailDeleter(state) {
             let targetIndex = state.currentEmailIndex;
             state.deleted.push(state.currentEmail[0])
-            console.log(state.currentEmail.length)
-            console.log(state.deleted.length)
+            removeByAttr()
+            
         }
 
 
