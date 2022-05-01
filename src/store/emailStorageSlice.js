@@ -51,13 +51,26 @@ const emailStorageSlice = createSlice({
         unreadEmailsCounter(state) {
             // in process
         },
-        emailDeleter(state) {
+        // sendToDeleted and sendToSpam may be unified if no change in functionality is expected
+        sendToDeleted(state) {
             let targetIndex = state.currentEmailIndex;
-            // state.deleted = [...state.deleted, state.currentEmail]
             let deletedTargetCount = state.deleted.filter(field => field.index === targetIndex)
             if(deletedTargetCount.length===0) {
                 state.deleted.unshift(...state.currentEmail[0])
             }
+            removeByAttr(state.inbox, 'index', targetIndex)
+            state.currentEmailIndex=0;
+            state.currentEmail=[];
+        },
+        sendToSpam(state) {
+            let targetIndex = state.currentEmailIndex;
+            let spamTargetCount = state.spam.filter(field => field.index === targetIndex)
+            if(spamTargetCount.length===0) {
+                state.spam.unshift(...state.currentEmail[0])
+            }
+            removeByAttr(state.inbox, 'index', targetIndex)
+            state.currentEmailIndex=0;
+            state.currentEmail=[];
         }
 
 
@@ -67,4 +80,4 @@ const emailStorageSlice = createSlice({
 
 export default emailStorageSlice.reducer;
 
-export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, emailDeleter} = emailStorageSlice.actions;
+export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, sendToDeleted, sendToSpam} = emailStorageSlice.actions;
