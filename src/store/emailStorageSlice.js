@@ -26,7 +26,8 @@ const emailStorageSlice = createSlice({
     },
     reducers: {
         inboxSetter(state, action) {
-            state.inbox = action.payload;
+            // state.inbox = action.payload;
+            state.inbox.unshift(...action.payload)
         },
         viewEmailContent(state, action) {
             let target = action.payload;
@@ -52,9 +53,11 @@ const emailStorageSlice = createSlice({
         },
         emailDeleter(state) {
             let targetIndex = state.currentEmailIndex;
-            state.deleted.push(state.currentEmail[0])
-            removeByAttr()
-            
+            // state.deleted = [...state.deleted, state.currentEmail]
+            let deletedTargetCount = state.deleted.filter(field => field.index === targetIndex)
+            if(deletedTargetCount.length===0) {
+                state.deleted.unshift(...state.currentEmail[0])
+            }
         }
 
 
