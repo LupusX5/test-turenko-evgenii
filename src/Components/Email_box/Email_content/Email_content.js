@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
 import paperclip from './icons/paperclip.svg'
-import { emailUnreader } from '../../../store/emailStorageSlice';
+import { emailUnreader, unreadEmailsCounter, emailDeleter } from '../../../store/emailStorageSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -73,7 +73,7 @@ const Email_content = ({index, from, body, tag, attachements}) => {
               <div className='email-content__head--left'>
                   <Stack direction="row" spacing={2}>
                         <ButtonRed size='small'>Delete</ButtonRed>
-                    <ButtonGreyOutlined size="small" variant='outlined'>Spam</ButtonGreyOutlined>
+                    <ButtonGreyOutlined onClick={()=>{dispatch(emailDeleter())}} size="small" variant='outlined'>Spam</ButtonGreyOutlined>
                   </Stack>
               </div>
                <div className='email-content__head--right'>

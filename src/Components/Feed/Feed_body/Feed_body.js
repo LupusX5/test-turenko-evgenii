@@ -23,7 +23,6 @@ const Feed_body = () => {
         return <div className='feed-email__alert'>Emails are being loaded...</div>
       } else
       if(array!==null) {
-        console.log(array.length)
          return array.map((item, id)=> {
           return <Feed_email key={id} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject}  time={item.date}/>
         })

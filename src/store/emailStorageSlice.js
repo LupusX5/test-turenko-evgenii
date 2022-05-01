@@ -46,12 +46,22 @@ const emailStorageSlice = createSlice({
             let targetIndex = state.currentEmailIndex;
             let currentEmail = state.inbox.filter(field => field.index === targetIndex)
             currentEmail[0].isReaded=false;
-            
+        },
+        unreadEmailsCounter(state) {
+            // in process
+        },
+        emailDeleter(state) {
+            let targetIndex = state.currentEmailIndex;
+            state.deleted.push(state.currentEmail[0])
+            console.log(state.currentEmail.length)
+            console.log(state.deleted.length)
         }
+
+
 
     }
 })
 
 export default emailStorageSlice.reducer;
 
-export const {inboxSetter, viewEmailContent, emailUnreader} = emailStorageSlice.actions;
+export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, emailDeleter} = emailStorageSlice.actions;
