@@ -1,0 +1,35 @@
+:root {
+    --email-content--font-color: #3B3D3F;
+    --email-content--gray: #F4F5F5;
+    --email-content--red: #FC3401;
+    --email-content--blue: #03B9ED;
+    --email-content--separator-color: #DBE4EB;
+}
+
+
+
+.email-content__head {
+    padding: 1.25rem 1.667rem;
+    height: 2.5rem;
+    border-width: 0px 0px 1px 0px;
+    border-color: var(--feed-search--separator-color);
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+
+.email-content__body { 
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1.667rem 1.667rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.email-content__from {
+    margin: 0px;
+}

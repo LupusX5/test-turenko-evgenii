@@ -19,15 +19,15 @@ const Feed_body = () => {
 
 
     const mapper = (array) => {
+      if(array.length===0) {
+        return <div className='feed-email__alert'>Emails are being loaded...</div>
+      } else
       if(array!==null) {
         console.log(array.length)
          return array.map((item, id)=> {
           return <Feed_email key={id} isRead={item.isReaded} from={item.from} subject={item.subject}  time={item.date}/>
         })
-      } else if(array === null || array.length===0) {
-          
-          return <div className='feed-email__alert'>Emails are being loaded...</div>
-      }
+      } 
     }
 
     const fetchEmails = async(url) => {
@@ -42,9 +42,9 @@ const Feed_body = () => {
       for(let i = 0; i<trigger.length; i++) {
         let a = {
           ...trigger[i],
-          index: i
+          index: (i + new Date().getTime())
         }
-        array.push(a)
+        array.unshift(a)
       }
 
       dispatch(inboxSetter(array))
@@ -55,6 +55,8 @@ const Feed_body = () => {
       const asyncStack = async() => {
         const trigger = await fetchEmails(apiUrl)
         const target = await modifyFetchedEmails(trigger)
+
+        return target
       }
 
       asyncStack()
