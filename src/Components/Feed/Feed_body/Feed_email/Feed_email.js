@@ -29,18 +29,16 @@ const Feed_email = ({from, time, subject, attachment, isRead, index}) => {
     }
 
     function highlightCurrentEmail(currentIndex, stateCurrentIndex) {
-        let target = document.getElementById('feedEmailBasicBody')
 
-        // console.log('this', currentIndex)
-        // console.log('global', stateCurrentIndex)
-        if(currentIndex === stateCurrentIndex) {
-            
-                return 'feed-email__current feed-email'
-        } else {
+        if(currentIndex === stateCurrentIndex && isRead) {
+            return 'feed-email__current feed-email__read'
+        } else if(currentIndex !== stateCurrentIndex && isRead) {
+            return 'feed-email__read'
+        } else if(currentIndex !== stateCurrentIndex && !isRead) {
             return 'feed-email__unread'
+        } else if(currentIndex === stateCurrentIndex && !isRead) {
+            return 'feed-email__unread feed-email__current'
         }
-
-        // return 'feed-email__unread'
     }
 
     const readMessage = () => {
