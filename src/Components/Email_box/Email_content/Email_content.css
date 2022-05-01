@@ -94,5 +94,24 @@
     border-bottom-right-radius: inherit;
     background-color: var(--email-content--gray);
     border-top: 1px solid var(--email-box--separator-color);
+    align-items: center;
+}
 
+.email-content-main-container__paragraph {
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 30px 30px;
+    line-height: 1.4rem;
+    letter-spacing: 0.04rem;
+}
+
+.email-content-main-container__attachments {
+    display: flex;
+    flex-direction: row;
+}
+
+.email-content-main-container__paperclip {
+    height: 1.4rem;
+    padding: 5px 10px;
 }

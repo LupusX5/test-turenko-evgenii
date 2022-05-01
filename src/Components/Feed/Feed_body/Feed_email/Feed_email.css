@@ -19,16 +19,28 @@
     border-style: solid;
 }
 
+.feed-email__current {
+    background-color: var(--feed-search--blue-bg);
+    border-left: 3px solid transparent;
+    
+
+}
+
+
+
 .feed-email {
     border-left: 3px solid transparent;
+    cursor: pointer;
 }
 
 .feed-email__unread {
     border-left: 3px solid var(--feed-email--blue);
     background-color: var(--feed-search--blue-bg);
+    cursor: pointer;
 }
 
-.feed-email__unread .feed_email__from {
+.feed-email__unread .feed_email__from, 
+.feed-email__current .feed_email__from {
     color: var(--feed-search--blue);
 }
 
@@ -36,7 +48,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    cursor: pointer;
+    
 }
 
 .feed-email__row {
