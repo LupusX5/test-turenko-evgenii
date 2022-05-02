@@ -15,7 +15,7 @@ const Feed_filter = () => {
     const [option, setOption] = React.useState(0);
 
     const handleChange = (event) => {
-      // setOption(event.target.value);
+      setOption(event.target.value);
       dispatch(setCurrentFolder(event.target.value))
       dispatch(resetCurrentEmail())
     };

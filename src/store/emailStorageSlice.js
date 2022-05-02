@@ -48,7 +48,7 @@ const emailStorageSlice = createSlice({
                 payload = 0 – filter by
                 payload = 10 – inbox
                 payload = 20 – spam
-                payload = 20 – deleted
+                payload = 30 – deleted
             */
             state.currentFolder = action.payload
 
@@ -114,7 +114,13 @@ const emailStorageSlice = createSlice({
             if(deletedTargetCount.length===0) {
                 state.deleted.unshift(...state.currentEmail[0]);
             }
-            removeByAttr(state.inbox, 'index', targetIndex);
+            
+            if(state.currentFolder === (0||10)) {
+                removeByAttr(state.inbox, 'index', targetIndex);
+            }   else if(state.currentFolder === 20) {
+                removeByAttr(state.spam, 'index', targetIndex);
+            }
+            
             state.currentEmailIndex=0;
             state.currentEmail=[];
 
