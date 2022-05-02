@@ -126,7 +126,7 @@ const emailStorageSlice = createSlice({
             let target = action.payload;
             let result;
             
-            if(currentFolder === (0 || 10)) {
+            if(currentFolder === 0 || currentFolder === 10) {
                 result = state.inbox.filter(field => field.index === target);
             } else if(currentFolder === 20) {
                 result = state.spam.filter(field => field.index === target);
@@ -153,7 +153,7 @@ const emailStorageSlice = createSlice({
             let targetIndex = state.currentEmailIndex;
             let targetEmail;
 
-            if(currentFolder === (0 || 10)) {
+            if(currentFolder === 0 || currentFolder === 10) {
                 targetEmail = state.inbox.filter(field => field.index === targetIndex);
             } else if(currentFolder === 20) {
                 targetEmail = state.spam.filter(field => field.index === targetIndex);

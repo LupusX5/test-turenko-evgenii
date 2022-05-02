@@ -69,7 +69,7 @@ const Feed_body = () => {
       } else
       if(array!==null) {
          return array.map((item, id)=> {
-          return <Feed_email key={id} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject} attachments={item.attachements} time={item.date}/>
+          return <Feed_email key={id} name={item.senderName} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject} attachments={item.attachements} time={item.date}/>
         })
       }
     }

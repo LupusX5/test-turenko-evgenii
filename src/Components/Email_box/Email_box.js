@@ -15,7 +15,7 @@ const Email_box = () => {
         ...trigger[0]
       };
       let target = data[0];
-      return <Email_content index={target.index} from={target.from} body={target.body} tag={target.tag} attachements={target.attachements}/>
+      return <Email_content  index={target.index} name={target.senderName} from={target.from} body={target.body} tag={target.tag} attachements={target.attachements}/>
     }
   }
 

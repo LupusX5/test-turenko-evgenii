@@ -75,7 +75,7 @@ const ButtonGreyOutlined = styled(Button)({
 })
 
 
-const Email_content = ({index, from, body, tag, attachements}) => {
+const Email_content = ({index, name, from, body, tag, attachements}) => {
     const currentFolder = useSelector(state => state.emailStorage.currentFolder);
     const dispatch = useDispatch();
 
@@ -96,7 +96,28 @@ const Email_content = ({index, from, body, tag, attachements}) => {
             return false;
         }
     };
-    
+
+    const stringToArray =(string) => {
+        if(string.length>0) {
+            if(string.includes(',')) {
+                let array = string.split(',')
+                return array.map((item, index) => {
+                    return <ul className='email-content__tags-list' key={index}>
+                            <li className='email-content__tag'>{item}</li>
+                        </ul>
+                })
+            } else {
+                return <ul className='email-content__tags-list' >
+                        <li className='email-content__tag'>{string}</li>
+                      </ul>
+            }
+        } else {
+            return <ul className='email-content__tags-list' >
+                    <li className='email-content__tag'></li>
+                </ul>
+        }
+    }
+
 
 
 
@@ -114,12 +135,13 @@ const Email_content = ({index, from, body, tag, attachements}) => {
                </div>
           </div>
           <div className='email-content__body'>
-              <h3 className='email-content__from'>{from}</h3>
+              <h3 className='email-content__from'>{name}</h3>
               <div className='email-content__tags'>
                   <p className='email-content__tags-title'>Tags</p>
-                  <ul className='email-content__tags-list'>
+                  {/* <ul className='email-content__tags-list'>
                       <li className='email-content__tag'>{tag}</li>
-                  </ul>
+                  </ul> */}
+                  {stringToArray(tag)}
               </div>
               <div className='email-content__main-container email-content-main-container'>
                     <div className='email-content-main-container__text-area'>

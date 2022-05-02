@@ -6,7 +6,7 @@ import paperClip from './../../../../icons/paperclip.svg';
 
 
 
-const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
+const Feed_email = ({from, time, subject, attachments, isRead, index, name}) => {
     
     const emailIndex = useSelector(state => state.emailStorage.currentEmailIndex);
     const dispatch = useDispatch();
@@ -37,13 +37,89 @@ const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
     }
 
 
+
+    const formatTime = (string) => {
+        const hoursFrom24To12 = (hour) => {
+            let result
+            switch(+hour) {
+                case 13:
+                    result = '01'
+                    break;
+                case 14:
+                    result = '02'
+                    break;
+                case 15:
+                    result = '03'
+                    break;
+                case 16:
+                    result = '04'
+                    break;
+                case 17:
+                    result = '05'
+                    break;
+                case 18:
+                    result = '06'
+                    break;
+                case 19:
+                    result = '07'
+                    break;
+                case 20:
+                    result = '08'
+                    break;
+                case 21:
+                    result = '09'
+                    break;
+                case 22:
+                    result = '10'
+                    break;
+                case 23:
+                    result = '11'
+                    break;
+                case 24:
+                    result = '12'
+                    break;
+                case parseInt('00'):
+                    result = '12'
+                    break;
+            }
+
+            return result;
+        }
+
+        const hours24toPMAndAM = (hour) => {
+            if(+hour>=12) {
+                return 'pm';
+            } else if(+hour<12) {
+                return 'am';
+            }
+        } 
+
+        if(string.length>0) {
+            if(string.includes(' ')){
+                let array = string.split(' ');
+                if(array.length === 2) {
+                    if(array[1].includes(':')) {
+                        let timeArray = array[1].split(':')
+                        let hours = timeArray[0]
+                        let minutes = timeArray[1]
+                        return <div className='feed_email__time'>{hoursFrom24To12(hours)}:{minutes} {hours24toPMAndAM(hours)}</div>
+                    } 
+                }
+                
+            } else {
+                return <div className='feed_email__time'>{string}</div>
+            }
+        } 
+    }
+
+
     return (
       <div onClick={()=> {readMessage()}} id='feedEmailBasicBody' className={highlightCurrentEmail(index, emailIndex)}>
           <div className='feed-email__inner'>
               <div className='feed-email__top feed-email__row'>
-                  <div className='feed_email__from'>{from}</div>
-                  {/*edited to match the original ui. Original value: {time}*/}
-                  <div className='feed_email__time'>{new Date(index-1).toLocaleTimeString([],{hour12:true, hour: '2-digit', minute:'2-digit'})}</div>
+                  <div className='feed_email__from'>{name}</div>
+                  {/* Expected unix timestamp. Original code: new Date(index-1).toLocaleTimeString([],{hour12:true, hour: '2-digit', minute:'2-digit'}) */}
+                  {formatTime(time)}
               </div>
               <div className='feed-email__bottom feed-email__row'>
                   <div className='feed_email__subject'>{subject}</div>
