@@ -1,3 +1,5 @@
 node_modules
 dist/*
 !dist/dist.xml
+build/*
+!build/build.xml
