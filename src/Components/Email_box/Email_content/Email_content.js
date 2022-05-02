@@ -3,7 +3,7 @@ import './Email_content.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
-import { emailUnreader, sendToDeleted, sendToSpam} from '../../../store/emailStorageSlice';
+import { emailUnreader, sendToDeleted, sendToSpam} from '../../../store/slices/emailStorageSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import paperclip from '../../../icons/paperclip.svg';
 

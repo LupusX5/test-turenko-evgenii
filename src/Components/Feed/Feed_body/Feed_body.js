@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Feed_body.css';
 import Feed_email from './Feed_email/Feed_email';
 import { useDispatch, useSelector } from 'react-redux';
-import { inboxSetter, unreadEmailsCounter } from '../../../store/emailStorageSlice';
+import { inboxSetter, unreadEmailsCounter } from '../../../store/slices/emailStorageSlice';
 import API from '../../../api/api';
 
 
@@ -99,7 +99,7 @@ const Feed_body = () => {
         const trigger = await fetchEmails(apiUrl)
         const target = await modifyFetchedEmails(trigger)
         
-        setTimeout(asyncStack, 2000)
+        setTimeout(asyncStack, 90000)
         return target
       }
 

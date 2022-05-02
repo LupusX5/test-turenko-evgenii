@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import emailStorageSlice from './emailStorageSlice';
+import emailStorageSlice from './slices/emailStorageSlice';
 
 const rootReducer = combineReducers({
     emailStorage: emailStorageSlice,

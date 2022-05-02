@@ -1,8 +1,7 @@
 import React from 'react';
 import './Feed_search.css';
-import searchIcon from './icons/search-icon/icons8-search-50.svg'
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchQuery } from '../../../store/emailStorageSlice';
+import { setSearchQuery } from '../../../store/slices/emailStorageSlice';
 import magnifyingGlass from '../../../icons/magnifying-glass.svg'
 
 

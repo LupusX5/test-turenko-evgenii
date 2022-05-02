@@ -1,7 +1,7 @@
 import React from 'react';
 import './Feed_email.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { viewEmailContent } from '../../../../store/emailStorageSlice';
+import { viewEmailContent } from '../../../../store/slices/emailStorageSlice';
 import paperClip from './../../../../icons/paperclip.svg';
 
 
