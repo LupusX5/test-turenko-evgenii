@@ -1,6 +1,6 @@
 import React from 'react';
 import './Feed_search.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSearchQuery } from '../../../store/slices/emailStorageSlice';
 import magnifyingGlass from '../../../icons/magnifying-glass.svg'
 
