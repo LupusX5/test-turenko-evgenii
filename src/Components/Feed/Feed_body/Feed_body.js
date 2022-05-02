@@ -14,8 +14,8 @@ const Feed_body = () => {
     const emailStorageListDeleted = useSelector(state => state.emailStorage.deleted);
     const emailStorageListSpam = useSelector(state => state.emailStorage.spam);
     const emailStorageListCurrentFolder = useSelector(state => state.emailStorage.currentFolder);
-    const searchQueryValue = useSelector(state => state.emailStorage.searchQuery)
-    const searchSearchResult = useSelector(state => state.emailStorage.searchResult)
+    const searchQueryValue = useSelector(state => state.emailStorage.searchQuery);
+    const searchSearchResult = useSelector(state => state.emailStorage.searchResult);
     const dispatch = useDispatch();
 
     
@@ -57,7 +57,7 @@ const Feed_body = () => {
   } else {
     return 'Inbox';
   }
-}
+  }
 
     // mapping current array received from the state
     const mapper = (array) => {
@@ -76,7 +76,7 @@ const Feed_body = () => {
 
     const fetchEmails = async(url) => {
       const response = await fetch(url);
-      const emailsList = await response.json()
+      const emailsList = await response.json();
       return emailsList;
     };
 
@@ -87,23 +87,23 @@ const Feed_body = () => {
           ...trigger[i],
           index: (i + new Date().getTime())
         }
-        array.unshift(a)
+        array.unshift(a);
       }
 
-      dispatch(inboxSetter(array))
+      dispatch(inboxSetter(array));
       
     }
 
     useEffect(()=> {
       const asyncStack = async() => {
-        const trigger = await fetchEmails(apiUrl)
-        const target = await modifyFetchedEmails(trigger)
+        const trigger = await fetchEmails(apiUrl);
+        const target = await modifyFetchedEmails(trigger);
         
-        setTimeout(asyncStack, 90000)
-        return target
+        setTimeout(asyncStack, 90000);
+        return target;
       }
 
-      asyncStack()
+      asyncStack();
       
     }, [])
 

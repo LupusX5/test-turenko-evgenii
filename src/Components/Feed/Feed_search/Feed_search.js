@@ -10,12 +10,12 @@ const Feed_search = () => {
 
 
     const setQuery = (event) => {
-      event.preventDefault()
-      dispatch(setSearchQuery(event.target.value))
+      event.preventDefault();
+      dispatch(setSearchQuery(event.target.value));
     }
 
     const focusOnInput = () => {
-      document.getElementById('feedSearchField').focus()
+      document.getElementById('feedSearchField').focus();
     }
 
     return (

@@ -22,7 +22,7 @@ const Feed_email = ({from, time, subject, attachments, isRead, index, name}) => 
         } else if(currentIndex === stateCurrentIndex && !isRead) {
             return 'feed-email__unread feed-email__current'
         }
-    }
+    };
 
     const displayAttachmentsIcon = (arr) => {
       if(arr && arr.length>0){
@@ -30,11 +30,11 @@ const Feed_email = ({from, time, subject, attachments, isRead, index, name}) => 
       } else {
         return <></>
       }
-    }
+    };
 
     const readMessage = () => {
         dispatch(viewEmailContent(index))
-    }
+    };
 
      //  formatting time in the right way. 
      //  Alternatively, to avoid this construction, I'd offer to get time as a unix timestamp
@@ -118,7 +118,7 @@ const Feed_email = ({from, time, subject, attachments, isRead, index, name}) => 
                 return <div className='feed_email__time'>{string}</div>
             }
         } 
-    }
+    };
 
 
     return (
