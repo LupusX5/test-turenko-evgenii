@@ -27,6 +27,8 @@ const setUnreadEmailsCount = async(state) => {
 const emailStorageSlice = createSlice({
     name: 'emailStorage',
     initialState: {
+        searchQuery: '',
+        searchResult: [],
         currentEmailIndex: 0,
         currentEmail: [],
         unread: 0,
@@ -36,6 +38,56 @@ const emailStorageSlice = createSlice({
         currentFolder: 0 // available folders: inbox/spam/deleted. Default folder: inbox.
     },
     reducers: {
+        setSearchQuery(state, action) {
+            state.searchQuery = action.payload
+
+            let currentFolder = state.currentFolder;
+            let searchDirectory;
+            let searchBySender;
+            let searchBySubject;
+            let searchByBody;
+
+            if(currentFolder === (0 || 10)) {
+                searchDirectory = state.inbox;
+            } else if(currentFolder === 20) {
+                searchDirectory = state.spam;
+            } else if(currentFolder === 30) {
+                searchDirectory = state.deleted;
+            } else {
+                searchDirectory = state.inbox;
+            }
+
+
+            if(state.searchQuery.length>0) {
+                searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery)});
+                searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery)});
+                searchByBody = searchDirectory.filter(field => {return field.body.toLowerCase().match(state.searchQuery)});
+                state.searchResult = [...searchBySender, ...searchBySubject, ...searchByBody];
+            } if(state.searchQuery.length===0) {
+                state.searchResult = [];
+            }
+        },
+        search(state){
+            let currentFolder = state.currentFolder;
+            let searchDirectory;
+            let result;
+
+            if(currentFolder === (0 || 10)) {
+                searchDirectory = state.inbox;
+            } else if(currentFolder === 20) {
+                searchDirectory = state.spam;
+            } else if(currentFolder === 30) {
+                searchDirectory = state.deleted;
+            } else {
+                searchDirectory = state.inbox;
+            }
+
+
+            if(state.searchQuery.length>0) {
+                result = searchDirectory.filter(field => field.from.match(state.searchQuery));
+                state.searchResult.unshift(...result);
+            }
+        },
         resetCurrentEmail(state){
             state.currentEmailIndex = 0;
             state.currentEmail = [];
@@ -97,8 +149,6 @@ const emailStorageSlice = createSlice({
                 targetEmail = state.spam.filter(field => field.index === targetIndex);
             } else if(currentFolder === 30) {
                 targetEmail = state.deleted.filter(field => field.index === targetIndex);
-            } else {
-                targetEmail = state.inbox.filter(field => field.index === targetIndex);
             }
             
             targetEmail[0].isReaded=false;
@@ -115,7 +165,7 @@ const emailStorageSlice = createSlice({
                 state.deleted.unshift(...state.currentEmail[0]);
             }
             
-            if(state.currentFolder === (0||10)) {
+            if(state.currentFolder === 0|| state.currentFolder === 10) {
                 removeByAttr(state.inbox, 'index', targetIndex);
             }   else if(state.currentFolder === 20) {
                 removeByAttr(state.spam, 'index', targetIndex);
@@ -143,4 +193,4 @@ const emailStorageSlice = createSlice({
 
 export default emailStorageSlice.reducer;
 
-export const {inboxSetter, viewEmailContent, emailUnreader, sendToDeleted, sendToSpam, setCurrentFolder, resetCurrentEmail} = emailStorageSlice.actions;
+export const {inboxSetter, viewEmailContent, emailUnreader, sendToDeleted, sendToSpam, setCurrentFolder, resetCurrentEmail, setSearchQuery} = emailStorageSlice.actions;

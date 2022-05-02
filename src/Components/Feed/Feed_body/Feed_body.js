@@ -13,6 +13,8 @@ const Feed_body = () => {
     const emailStorageListDeleted = useSelector(state => state.emailStorage.deleted);
     const emailStorageListSpam = useSelector(state => state.emailStorage.spam);
     const emailStorageListCurrentFolder = useSelector(state => state.emailStorage.currentFolder);
+    const searchQueryValue = useSelector(state => state.emailStorage.searchQuery)
+    const searchSearchResult = useSelector(state => state.emailStorage.searchResult)
     
     const dispatch = useDispatch();
 
@@ -20,8 +22,6 @@ const Feed_body = () => {
     // 'https://8a7a7925-028a-4dcb-b408-785a0ddfec2a.mock.pstmn.io/emails'
     const apiUrl = 'https://run.mocky.io/v3/c7f5e63f-537b-4121-a703-6ae4467053d5'
   
-
-    const [emails, setEmails] = useState(null)
 
     const getCurrentFolder = (folder) => {
             /* 
@@ -93,7 +93,6 @@ const Feed_body = () => {
       
     }
 
-
     useEffect(()=> {
       const asyncStack = async() => {
         const trigger = await fetchEmails(apiUrl)
@@ -107,9 +106,17 @@ const Feed_body = () => {
       
     }, [])
 
+    const handleSearch = (inputValue) => {
+      if(inputValue.length>0) {
+        return searchSearchResult;
+      } else if(inputValue.length===0) {
+        return getCurrentFolder(emailStorageListCurrentFolder);
+      }
+    }
+
     return (
       <div className="feed-body">
-          {mapper(getCurrentFolder(emailStorageListCurrentFolder))}
+          {mapper(handleSearch(searchQueryValue))}
       </div>
     );
   }

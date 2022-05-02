@@ -11,20 +11,6 @@ const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
     const emailIndex = useSelector(state => state.emailStorage.currentEmailIndex);
     const dispatch = useDispatch();
 
-
-    const content = (trigger) => {
-      if(trigger.length === 0) {
-        return <></>
-      } else if(trigger.length === 1) {
-        let data = {
-          ...trigger[0]
-        };
-        let target = data[0];
-        console.log(target.attachements)
-        return <Email_content from={target.from} body={target.body} tag={target.tag} attachements={target.attachements}/>
-      }
-    }
-
     function highlightCurrentEmail(currentIndex, stateCurrentIndex) {
 
         if(currentIndex === stateCurrentIndex && isRead) {
@@ -52,14 +38,12 @@ const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
     }
 
 
-    //<div onClick={()=> {readMessage()}} id='feedEmailBasicBody' className={read?"feed-email keka":"feed-email__unread"}>
-
     return (
       <div onClick={()=> {readMessage()}} id='feedEmailBasicBody' className={highlightCurrentEmail(index, emailIndex)}>
           <div className='feed-email__inner'>
               <div className='feed-email__top feed-email__row'>
                   <div className='feed_email__from'>{from}</div>
-                  {/*edited for matching the designed ui. Original value: {time}*/}
+                  {/*edited to match the original ui. Original value: {time}*/}
                   <div className='feed_email__time'>{new Date(index-1).toLocaleTimeString([],{hour12:true, hour: '2-digit', minute:'2-digit'})}</div>
               </div>
               <div className='feed-email__bottom feed-email__row'>
