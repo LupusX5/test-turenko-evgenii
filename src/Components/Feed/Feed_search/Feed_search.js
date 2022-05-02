@@ -3,6 +3,7 @@ import './Feed_search.css';
 import searchIcon from './icons/search-icon/icons8-search-50.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchQuery } from '../../../store/emailStorageSlice';
+import magnifyingGlass from '../../../icons/magnifying-glass.svg'
 
 
 const Feed_search = () => {
@@ -14,11 +15,15 @@ const Feed_search = () => {
       dispatch(setSearchQuery(event.target.value))
     }
 
+    const focusOnInput = () => {
+      document.getElementById('feedSearchField').focus()
+    }
+
     return (
       <div className="feed-search">
           <div className='feed-search__inner'>
-              <input onChange={setQuery} className='feed-search__search' placeholder='Search'/>
-              <img className='feed-search__icon' src={searchIcon}/>
+              <input type='text' onChange={setQuery} id='feedSearchField' className='feed-search__search' placeholder='Search'/>
+              <img onClick={()=>{focusOnInput()}} className='feed-search__icon' src={magnifyingGlass}/>
           </div>
       </div>
     );

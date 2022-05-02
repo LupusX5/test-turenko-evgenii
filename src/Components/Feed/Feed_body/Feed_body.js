@@ -62,7 +62,7 @@ const Feed_body = () => {
     // mapping current array received from the state
     const mapper = (array) => {
       if(searchSearchResult.length===0 && searchQueryValue.length>0) {
-        return <div className='feed-email__alert'>No matches were found for the query:<strong>&nbsp;{searchQueryValue}</strong></div>
+        return <div className='feed-email__alert'><span>No matches were found for the query:<strong>&nbsp;{searchQueryValue}</strong></span></div>
       }else
       if(array.length===0) {
         return <div className='feed-email__alert'>{getCurrentFolderName(emailStorageListCurrentFolder)} folder is empty</div>
@@ -99,7 +99,7 @@ const Feed_body = () => {
         const trigger = await fetchEmails(apiUrl)
         const target = await modifyFetchedEmails(trigger)
         
-        setTimeout(asyncStack, 90000)
+        setTimeout(asyncStack, 2000)
         return target
       }
 

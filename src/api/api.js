@@ -1,5 +1,5 @@
 const API = {
-    emails:'https://run.mocky.io/v3/4048f6bf-dfbb-4eb2-a5ee-ee3e4c8ca4c1'
+    emails:'https://run.mocky.io/v3/d72ef32d-29a9-4d90-8c68-bc27b6846370'
 }
 
 export default API;

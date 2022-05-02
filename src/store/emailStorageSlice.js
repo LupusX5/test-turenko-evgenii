@@ -67,7 +67,7 @@ const emailStorageSlice = createSlice({
             }
 
             if(state.searchQuery.length>0) {
-                let searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery.toLowerCase())});
+                let searchBySender = searchDirectory.filter(field => {return field.senderName.toLowerCase().match(state.searchQuery.toLowerCase())});
                 let searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery.toLowerCase())});
                 let middleArray = [...searchBySender, ...searchBySubject];
       

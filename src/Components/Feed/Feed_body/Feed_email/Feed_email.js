@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Feed_email.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { viewEmailContent } from '../../../../store/emailStorageSlice';
@@ -36,50 +36,58 @@ const Feed_email = ({from, time, subject, attachments, isRead, index, name}) => 
         dispatch(viewEmailContent(index))
     }
 
-
-
+     //  formatting time in the right way. 
+     //  Alternatively, to avoid this construction, I'd offer to get time as a unix timestamp
     const formatTime = (string) => {
         const hoursFrom24To12 = (hour) => {
             let result
+            if(+hour<12 && +hour>10) {
+                return hour;
+            } else if(+hour<10) {
+                return `0${hour}`;
+            }
             switch(+hour) {
+                case +hour<12:
+                    result=hour;
+                    break;
                 case 13:
-                    result = '01'
+                    result = '01';
                     break;
                 case 14:
-                    result = '02'
+                    result = '02';
                     break;
                 case 15:
-                    result = '03'
+                    result = '03';
                     break;
                 case 16:
-                    result = '04'
+                    result = '04';
                     break;
                 case 17:
-                    result = '05'
+                    result = '05';
                     break;
                 case 18:
-                    result = '06'
+                    result = '06';
                     break;
                 case 19:
-                    result = '07'
+                    result = '07';
                     break;
                 case 20:
-                    result = '08'
+                    result = '08';
                     break;
                 case 21:
-                    result = '09'
+                    result = '09';
                     break;
                 case 22:
-                    result = '10'
+                    result = '10';
                     break;
                 case 23:
-                    result = '11'
+                    result = '11';
                     break;
                 case 24:
-                    result = '12'
+                    result = '12';
                     break;
                 case parseInt('00'):
-                    result = '12'
+                    result = '12';
                     break;
             }
 
