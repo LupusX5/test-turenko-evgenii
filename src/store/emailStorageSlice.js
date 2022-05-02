@@ -14,6 +14,15 @@ const removeByAttr = function(arr, attr, value){
 }
 
 
+const  getUniqueArrayValues = (arr) => {
+    let finalArray = [];
+    for (let i=0, l=arr.length; i<l; i++)
+        if (finalArray.indexOf(arr[i]) === -1 && arr[i] !== '')
+        finalArray.push(arr[i]);
+    return finalArray;
+}
+
+
 const setUnreadEmailsCount = async(state) => {
     let unreadInbox = state.inbox.filter(field => field.isReaded === false);
     let unreadSpam = state.spam.filter(field => field.isReaded === false);
@@ -46,6 +55,7 @@ const emailStorageSlice = createSlice({
             let searchBySender;
             let searchBySubject;
             let searchByBody;
+            let resultArray = [];
 
             if(currentFolder === (0 || 10)) {
                 searchDirectory = state.inbox;
@@ -63,7 +73,18 @@ const emailStorageSlice = createSlice({
                 searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery)});
                 searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery)});
                 searchByBody = searchDirectory.filter(field => {return field.body.toLowerCase().match(state.searchQuery)});
-                state.searchResult = [...searchBySender, ...searchBySubject, ...searchByBody];
+                let middleArray = [...searchBySender, ...searchBySubject, ...searchByBody];
+                // if(middleArray.length>0) {
+                //     for(let i=0; i<middleArray.length; i++) {
+                //         if(!resultArray[].includes(middleArray[i].index)){
+                //             resultArray.push(middleArray[i])
+                //             console.log(resultArray[i].index)
+                //         }
+                //     }
+                // }
+                console.log(getUniqueArrayValues(middleArray))
+                state.searchResult = [...getUniqueArrayValues(middleArray)];
+                // console.log(current(state.searchResult[0]))
             } if(state.searchQuery.length===0) {
                 state.searchResult = [];
             }
