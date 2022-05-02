@@ -76,7 +76,26 @@ const ButtonGreyOutlined = styled(Button)({
 
 
 const Email_content = ({index, from, body, tag, attachements}) => {
+    const currentFolder = useSelector(state => state.emailStorage.currentFolder);
     const dispatch = useDispatch();
+
+    const disableWhenInOwnFolder = (number, folder, numberOptional) => {
+        /* 
+                folders: 
+                payload = 0 – filter by
+                payload = 10 – inbox
+                payload = 20 – spam
+                payload = 30 – deleted
+            */
+        numberOptional = numberOptional || false;
+        if(folder === number || folder === numberOptional) {
+            return true
+        } else if(folder === number && !numberOptional){
+            return true
+        } else {
+            return false;
+        }
+    };
     
 
 
@@ -86,8 +105,8 @@ const Email_content = ({index, from, body, tag, attachements}) => {
           <div className='email-content__head'>
               <div className='email-content__head--left'>
                   <Stack direction="row" spacing={2}>
-                        <ButtonRed onClick={()=>{dispatch(sendToDeleted())}} size='small'>Delete</ButtonRed>
-                    <ButtonGreyOutlined disabled={true} onClick={()=>{dispatch(sendToSpam())}} size="small" variant='outlined'>Spam</ButtonGreyOutlined>
+                        <ButtonRed disabled={disableWhenInOwnFolder(30, currentFolder)} onClick={()=>{dispatch(sendToDeleted())}} size='small'>Delete</ButtonRed>
+                    <ButtonGreyOutlined disabled={disableWhenInOwnFolder(20, currentFolder, 30)} onClick={()=>{dispatch(sendToSpam())}} size="small" variant='outlined'>Spam</ButtonGreyOutlined>
                   </Stack>
               </div>
                <div className='email-content__head--right'>
