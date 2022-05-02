@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Feed_body.css';
 import Feed_email from './Feed_email/Feed_email';
 import { useDispatch, useSelector } from 'react-redux';
-import { inboxSetter, unreadEmailsCounter } from '../../../store/slices/emailStorageSlice';
+import { inboxSetter } from '../../../store/slices/emailStorageSlice';
 import API from '../../../api/api';
 
 

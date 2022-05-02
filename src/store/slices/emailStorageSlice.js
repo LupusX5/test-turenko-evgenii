@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current } from "@reduxjs/toolkit";
 
 const removeByAttr = function(arr, attr, value){
     var i = arr.length;
