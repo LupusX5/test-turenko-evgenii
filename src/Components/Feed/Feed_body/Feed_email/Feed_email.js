@@ -59,7 +59,8 @@ const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
           <div className='feed-email__inner'>
               <div className='feed-email__top feed-email__row'>
                   <div className='feed_email__from'>{from}</div>
-                  <div className='feed_email__time'>{time}</div>
+                  {/*edited for matching the designed ui. Original value: {time}*/}
+                  <div className='feed_email__time'>{new Date(index-1).toLocaleTimeString([],{hour12:true, hour: '2-digit', minute:'2-digit'})}</div>
               </div>
               <div className='feed-email__bottom feed-email__row'>
                   <div className='feed_email__subject'>{subject}</div>
