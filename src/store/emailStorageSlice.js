@@ -13,6 +13,20 @@ const removeByAttr = function(arr, attr, value){
     return arr;
 }
 
+
+const identifyCurrentFolder = (state, local) => {
+    let currentFolder = state.currentFolder;
+    if(currentFolder === (0 || 10)) {
+        result = state.inbox.filter(field => field.index === target)
+    } else if(currentFolder === 20) {
+        result = state.spam.filter(field => field.index === target)
+    } else if(currentFolder === 30) {
+        result = state.deleted.filter(field => field.index === target)
+    } else {
+        result = state.inbox.filter(field => field.index === target)
+    }
+} 
+
 const emailStorageSlice = createSlice({
     name: 'emailStorage',
     initialState: {
@@ -25,6 +39,10 @@ const emailStorageSlice = createSlice({
         currentFolder: 0 // available folders: inbox/spam/deleted. Default folder: inbox.
     },
     reducers: {
+        resetCurrentEmail(state){
+            state.currentEmailIndex = 0;
+            state.currentEmail = [];
+        },
         setCurrentFolder(state, action){
             /* 
                 folders: 
@@ -40,8 +58,20 @@ const emailStorageSlice = createSlice({
             state.inbox.unshift(...action.payload)
         },
         viewEmailContent(state, action) {
+            let currentFolder = state.currentFolder;
             let target = action.payload;
-            let result = state.inbox.filter(field => field.index === target);
+            let result;
+            if(currentFolder === (0 || 10)) {
+                result = state.inbox.filter(field => field.index === target)
+            } else if(currentFolder === 20) {
+                result = state.spam.filter(field => field.index === target)
+            } else if(currentFolder === 30) {
+                result = state.deleted.filter(field => field.index === target)
+            } else {
+                result = state.inbox.filter(field => field.index === target)
+            }
+
+            // let result = state.inbox.filter(field => field.index === target);
             if(state.currentEmail.length>0) {
                 state.currentEmail = [];
                 state.currentEmail.push(result);
@@ -54,12 +84,29 @@ const emailStorageSlice = createSlice({
             }
         },
         emailUnreader(state) {
+            let currentFolder = state.currentFolder;
             let targetIndex = state.currentEmailIndex;
-            let currentEmail = state.inbox.filter(field => field.index === targetIndex)
+            let currentEmail
+
+            if(currentFolder === (0 || 10)) {
+                currentEmail = state.inbox.filter(field => field.index === targetIndex)
+            } else if(currentFolder === 20) {
+                currentEmail = state.spam.filter(field => field.index === targetIndex)
+            } else if(currentFolder === 30) {
+                currentEmail = state.deleted.filter(field => field.index === targetIndex)
+            } else {
+                currentEmail = state.inbox.filter(field => field.index === targetIndex)
+            }
+            
             currentEmail[0].isReaded=false;
+            state.currentEmail=[]
+            state.currentEmail.push(currentEmail)
         },
         unreadEmailsCounter(state) {
-            // in process
+            let unreadInbox = state.inbox.filter(field => field.isReaded === false);
+            let unreadSpam = state.spam.filter(field => field.isReaded === false);
+            let unreadDeleted = state.deleted.filter(field => field.isReaded === false);
+            console.log(unreadInbox.length+unreadSpam.length+unreadDeleted.length)
         },
         // sendToDeleted and sendToSpam may be unified if no change in functionality is expected
         sendToDeleted(state) {
@@ -91,4 +138,4 @@ const emailStorageSlice = createSlice({
 
 export default emailStorageSlice.reducer;
 
-export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, sendToDeleted, sendToSpam, setCurrentFolder} = emailStorageSlice.actions;
+export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, sendToDeleted, sendToSpam, setCurrentFolder, resetCurrentEmail} = emailStorageSlice.actions;

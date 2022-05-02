@@ -3,7 +3,7 @@ import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import './Feed_filter.css';
-import { setCurrentFolder } from '../../../../store/emailStorageSlice';
+import { setCurrentFolder, resetCurrentEmail } from '../../../../store/emailStorageSlice';
 import { useDispatch } from 'react-redux';
 
   
@@ -17,6 +17,7 @@ const Feed_filter = () => {
     const handleChange = (event) => {
       setOption(event.target.value);
       dispatch(setCurrentFolder(event.target.value))
+      dispatch(resetCurrentEmail())
     };
 
     return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Feed_body.css';
 import Feed_email from './Feed_email/Feed_email';
 import { useDispatch, useSelector } from 'react-redux';
-import { inboxSetter } from '../../../store/emailStorageSlice';
+import { inboxSetter, unreadEmailsCounter } from '../../../store/emailStorageSlice';
 
 
 
@@ -40,9 +40,28 @@ const Feed_body = () => {
       }
     }
 
+    const getCurrentFolderName = (folder) => {
+      /* 
+          folders: 
+          0 – filter by
+          10 – inbox
+          20 – spam
+          30 – deleted
+      */
+  if(folder === (0 || 10)) {
+    return 'Inbox';
+  } else if(folder === 20) {
+    return 'Spam';
+  } else if(folder === 30) {
+    return 'Deleted emails';
+  } else {
+    return 'Inbox';
+  }
+}
+
     const mapper = (array) => {
       if(array.length===0) {
-        return <div className='feed-email__alert'>Inbox folder is empty</div>
+        return <div className='feed-email__alert'>{getCurrentFolderName(emailStorageListCurrentFolder)} folder is empty</div>
       } else
       if(array!==null) {
          return array.map((item, id)=> {
