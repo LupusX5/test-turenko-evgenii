@@ -109,9 +109,14 @@
 .email-content-main-container__attachments {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .email-content-main-container__paperclip {
-    height: 1.4rem;
+    height: 1.3rem;
     padding: 5px 10px;
+}
+
+.email-content-main-container__attachment {
+    margin-left: 10px;
 }

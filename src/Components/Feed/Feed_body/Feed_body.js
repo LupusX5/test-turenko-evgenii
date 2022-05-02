@@ -6,6 +6,7 @@ import { inboxSetter, unreadEmailsCounter } from '../../../store/emailStorageSli
 
 
 
+
 const Feed_body = () => {
 
     const emailStorageListDefault = useSelector(state => state.emailStorage.inbox);
@@ -16,7 +17,8 @@ const Feed_body = () => {
     const dispatch = useDispatch();
 
     // replace by a different url if this one will be expired
-    const apiUrl = 'https://8a7a7925-028a-4dcb-b408-785a0ddfec2a.mock.pstmn.io/emails'
+    // 'https://8a7a7925-028a-4dcb-b408-785a0ddfec2a.mock.pstmn.io/emails'
+    const apiUrl = 'https://run.mocky.io/v3/c7f5e63f-537b-4121-a703-6ae4467053d5'
   
 
     const [emails, setEmails] = useState(null)
@@ -65,7 +67,7 @@ const Feed_body = () => {
       } else
       if(array!==null) {
          return array.map((item, id)=> {
-          return <Feed_email key={id} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject}  time={item.date}/>
+          return <Feed_email key={id} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject} attachments={item.attachements} time={item.date}/>
         })
       } 
     }

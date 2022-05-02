@@ -17,6 +17,7 @@
     border-width: 0px 0px 1px 0px;
     border-color: var(--feed-email--separator-color);
     border-style: solid;
+    height: 3.5rem;
 }
 
 .feed-email__current {
@@ -59,4 +60,8 @@
 
 .feed-email__bottom {
     margin-top: 10px;
+}
+
+.feed_email__attachment {
+    height: 1.2rem;
 }

@@ -14,25 +14,22 @@ const removeByAttr = function(arr, attr, value){
 }
 
 
-const identifyCurrentFolder = (state, local) => {
-    let currentFolder = state.currentFolder;
-    if(currentFolder === (0 || 10)) {
-        result = state.inbox.filter(field => field.index === target)
-    } else if(currentFolder === 20) {
-        result = state.spam.filter(field => field.index === target)
-    } else if(currentFolder === 30) {
-        result = state.deleted.filter(field => field.index === target)
-    } else {
-        result = state.inbox.filter(field => field.index === target)
-    }
-} 
+const setUnreadEmailsCount = async(state) => {
+    let unreadInbox = state.inbox.filter(field => field.isReaded === false);
+    let unreadSpam = state.spam.filter(field => field.isReaded === false);
+    let unreadDeleted = state.deleted.filter(field => field.isReaded === false);
+
+    let result = unreadInbox.length+unreadSpam.length+unreadDeleted.length;
+
+    state.unread = result;
+}
 
 const emailStorageSlice = createSlice({
     name: 'emailStorage',
     initialState: {
         currentEmailIndex: 0,
         currentEmail: [],
-        unread: [],
+        unread: 0,
         inbox: [],
         spam: [],
         deleted: [],
@@ -42,6 +39,8 @@ const emailStorageSlice = createSlice({
         resetCurrentEmail(state){
             state.currentEmailIndex = 0;
             state.currentEmail = [];
+
+            setUnreadEmailsCount(state);
         },
         setCurrentFolder(state, action){
             /* 
@@ -52,90 +51,90 @@ const emailStorageSlice = createSlice({
                 payload = 20 – deleted
             */
             state.currentFolder = action.payload
+
+            setUnreadEmailsCount(state);
         },
         inboxSetter(state, action) {
             // state.inbox = action.payload;
             state.inbox.unshift(...action.payload)
+            setUnreadEmailsCount(state);
         },
         viewEmailContent(state, action) {
             let currentFolder = state.currentFolder;
             let target = action.payload;
             let result;
+            
             if(currentFolder === (0 || 10)) {
-                result = state.inbox.filter(field => field.index === target)
+                result = state.inbox.filter(field => field.index === target);
             } else if(currentFolder === 20) {
-                result = state.spam.filter(field => field.index === target)
+                result = state.spam.filter(field => field.index === target);
             } else if(currentFolder === 30) {
-                result = state.deleted.filter(field => field.index === target)
+                result = state.deleted.filter(field => field.index === target);
             } else {
-                result = state.inbox.filter(field => field.index === target)
+                result = state.inbox.filter(field => field.index === target);
             }
-
-            // let result = state.inbox.filter(field => field.index === target);
+            
             if(state.currentEmail.length>0) {
                 state.currentEmail = [];
                 state.currentEmail.push(result);
                 state.currentEmailIndex = result[0].index;
                 result[0].isReaded = true;
             } else if(state.currentEmail.length===0) {
-                state.currentEmail.push(result)
+                state.currentEmail.push(result);
                 state.currentEmailIndex = result[0].index;
                 result[0].isReaded = true;
             }
+            setUnreadEmailsCount(state);
         },
         emailUnreader(state) {
             let currentFolder = state.currentFolder;
             let targetIndex = state.currentEmailIndex;
-            let currentEmail
+            let targetEmail;
 
             if(currentFolder === (0 || 10)) {
-                currentEmail = state.inbox.filter(field => field.index === targetIndex)
+                targetEmail = state.inbox.filter(field => field.index === targetIndex);
             } else if(currentFolder === 20) {
-                currentEmail = state.spam.filter(field => field.index === targetIndex)
+                targetEmail = state.spam.filter(field => field.index === targetIndex);
             } else if(currentFolder === 30) {
-                currentEmail = state.deleted.filter(field => field.index === targetIndex)
+                targetEmail = state.deleted.filter(field => field.index === targetIndex);
             } else {
-                currentEmail = state.inbox.filter(field => field.index === targetIndex)
+                targetEmail = state.inbox.filter(field => field.index === targetIndex);
             }
             
-            currentEmail[0].isReaded=false;
-            state.currentEmail=[]
-            state.currentEmail.push(currentEmail)
-        },
-        unreadEmailsCounter(state) {
-            let unreadInbox = state.inbox.filter(field => field.isReaded === false);
-            let unreadSpam = state.spam.filter(field => field.isReaded === false);
-            let unreadDeleted = state.deleted.filter(field => field.isReaded === false);
-            console.log(unreadInbox.length+unreadSpam.length+unreadDeleted.length)
+            targetEmail[0].isReaded=false;
+            state.currentEmail=[];
+            state.currentEmail.push(targetEmail);
+
+            setUnreadEmailsCount(state);
         },
         // sendToDeleted and sendToSpam may be unified if no change in functionality is expected
         sendToDeleted(state) {
             let targetIndex = state.currentEmailIndex;
-            let deletedTargetCount = state.deleted.filter(field => field.index === targetIndex)
+            let deletedTargetCount = state.deleted.filter(field => field.index === targetIndex);
             if(deletedTargetCount.length===0) {
-                state.deleted.unshift(...state.currentEmail[0])
+                state.deleted.unshift(...state.currentEmail[0]);
             }
-            removeByAttr(state.inbox, 'index', targetIndex)
+            removeByAttr(state.inbox, 'index', targetIndex);
             state.currentEmailIndex=0;
             state.currentEmail=[];
+
+            setUnreadEmailsCount(state);
         },
         sendToSpam(state) {
             let targetIndex = state.currentEmailIndex;
-            let spamTargetCount = state.spam.filter(field => field.index === targetIndex)
+            let spamTargetCount = state.spam.filter(field => field.index === targetIndex);
             if(spamTargetCount.length===0) {
-                state.spam.unshift(...state.currentEmail[0])
+                state.spam.unshift(...state.currentEmail[0]);
             }
-            console.log(current(state.spam))
             removeByAttr(state.inbox, 'index', targetIndex)
             state.currentEmailIndex=0;
             state.currentEmail=[];
+
+            setUnreadEmailsCount(state);
         }
-
-
-
     }
 })
 
 export default emailStorageSlice.reducer;
 
-export const {inboxSetter, viewEmailContent, emailUnreader, unreadEmailsCounter, sendToDeleted, sendToSpam, setCurrentFolder, resetCurrentEmail} = emailStorageSlice.actions;
+export const {inboxSetter, viewEmailContent, emailUnreader, sendToDeleted, sendToSpam, setCurrentFolder, resetCurrentEmail} = emailStorageSlice.actions;

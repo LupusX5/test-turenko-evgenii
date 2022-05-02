@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import './Feed_email.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEmailBody } from '../../../../store/emailContentSlice';
 import { viewEmailContent } from '../../../../store/emailStorageSlice';
+import paperClip from './../../../../icons/paperclip.svg';
 
 
 
-const Feed_email = ({from, time, subject, attachment, isRead, index}) => {
+const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
     
-    const [read, setRead] = useState(isRead)
-
-    const emailContentBody = useSelector(state => state.emailContent.content);
     const emailIndex = useSelector(state => state.emailStorage.currentEmailIndex);
     const dispatch = useDispatch();
 
@@ -41,9 +38,16 @@ const Feed_email = ({from, time, subject, attachment, isRead, index}) => {
         }
     }
 
+
+    const displayAttachmentsIcon = (arr) => {
+      if(arr && arr.length>0){
+        return <img className='feed_email__attachment' src={paperClip}/>
+      } else {
+        return <></>
+      }
+    }
+
     const readMessage = () => {
-        setRead(true);
-        dispatch(addEmailBody('djkfsdkfs'))
         dispatch(viewEmailContent(index))
     }
 
@@ -59,7 +63,7 @@ const Feed_email = ({from, time, subject, attachment, isRead, index}) => {
               </div>
               <div className='feed-email__bottom feed-email__row'>
                   <div className='feed_email__subject'>{subject}</div>
-                  <div className='feed_email__attachment'>{isRead.toString()}</div>
+                  {displayAttachmentsIcon(attachments)}
               </div>
           </div>
       </div>
