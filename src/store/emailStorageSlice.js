@@ -70,9 +70,9 @@ const emailStorageSlice = createSlice({
 
 
             if(state.searchQuery.length>0) {
-                searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery)});
-                searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery)});
-                searchByBody = searchDirectory.filter(field => {return field.body.toLowerCase().match(state.searchQuery)});
+                searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery.toLowerCase())});
+                searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery.toLowerCase())});
+                searchByBody = searchDirectory.filter(field => {return field.body.toLowerCase().match(state.searchQuery.toLowerCase())});
                 let middleArray = [...searchBySender, ...searchBySubject, ...searchByBody];
                 // if(middleArray.length>0) {
                 //     for(let i=0; i<middleArray.length; i++) {
@@ -82,9 +82,7 @@ const emailStorageSlice = createSlice({
                 //         }
                 //     }
                 // }
-                console.log(getUniqueArrayValues(middleArray))
                 state.searchResult = [...getUniqueArrayValues(middleArray)];
-                // console.log(current(state.searchResult[0]))
             } if(state.searchQuery.length===0) {
                 state.searchResult = [];
             }
