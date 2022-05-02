@@ -3,24 +3,22 @@ import './Feed_body.css';
 import Feed_email from './Feed_email/Feed_email';
 import { useDispatch, useSelector } from 'react-redux';
 import { inboxSetter, unreadEmailsCounter } from '../../../store/emailStorageSlice';
+import API from '../../../api/api';
 
 
 
 
 const Feed_body = () => {
-
+    const apiUrl = API.emails
     const emailStorageListDefault = useSelector(state => state.emailStorage.inbox);
     const emailStorageListDeleted = useSelector(state => state.emailStorage.deleted);
     const emailStorageListSpam = useSelector(state => state.emailStorage.spam);
     const emailStorageListCurrentFolder = useSelector(state => state.emailStorage.currentFolder);
     const searchQueryValue = useSelector(state => state.emailStorage.searchQuery)
     const searchSearchResult = useSelector(state => state.emailStorage.searchResult)
-    
     const dispatch = useDispatch();
 
-    // replace by a different url if this one will be expired
-    // 'https://8a7a7925-028a-4dcb-b408-785a0ddfec2a.mock.pstmn.io/emails'
-    const apiUrl = 'https://run.mocky.io/v3/c7f5e63f-537b-4121-a703-6ae4467053d5'
+    
   
 
     const getCurrentFolder = (folder) => {
@@ -61,7 +59,11 @@ const Feed_body = () => {
   }
 }
 
+    // mapping current array received from the state
     const mapper = (array) => {
+      if(searchSearchResult.length===0 && searchQueryValue.length>0) {
+        return <div className='feed-email__alert'>No matches were found for the query:<strong>&nbsp;{searchQueryValue}</strong></div>
+      }else
       if(array.length===0) {
         return <div className='feed-email__alert'>{getCurrentFolderName(emailStorageListCurrentFolder)} folder is empty</div>
       } else
@@ -69,7 +71,7 @@ const Feed_body = () => {
          return array.map((item, id)=> {
           return <Feed_email key={id} index={item.index} isRead={item.isReaded} from={item.from} subject={item.subject} attachments={item.attachements} time={item.date}/>
         })
-      } 
+      }
     }
 
     const fetchEmails = async(url) => {
@@ -77,7 +79,6 @@ const Feed_body = () => {
       const emailsList = await response.json()
       return emailsList;
     };
-
 
     const modifyFetchedEmails = async(trigger) => {
       let array=[];
@@ -106,6 +107,10 @@ const Feed_body = () => {
       
     }, [])
 
+    /* 
+      once a user writes at least one character, 
+      the mapper function will switch the current array to an array with search results 
+    */
     const handleSearch = (inputValue) => {
       if(inputValue.length>0) {
         return searchSearchResult;

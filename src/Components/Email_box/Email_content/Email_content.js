@@ -3,9 +3,9 @@ import './Email_content.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
-import paperclip from './icons/paperclip.svg'
 import { emailUnreader, sendToDeleted, sendToSpam} from '../../../store/emailStorageSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import paperclip from '../../../icons/paperclip.svg';
 
 const ButtonRed = styled(Button)({
     backgroundColor: '#FC3401',

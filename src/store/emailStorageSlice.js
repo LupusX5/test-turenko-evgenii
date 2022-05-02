@@ -52,10 +52,8 @@ const emailStorageSlice = createSlice({
 
             let currentFolder = state.currentFolder;
             let searchDirectory;
-            let searchBySender;
-            let searchBySubject;
-            let searchByBody;
-            let resultArray = [];
+            // let searchBySender;
+            // let searchBySubject;
 
             if(currentFolder === (0 || 10)) {
                 searchDirectory = state.inbox;
@@ -68,21 +66,13 @@ const emailStorageSlice = createSlice({
         
             }
 
-
             if(state.searchQuery.length>0) {
-                searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery.toLowerCase())});
-                searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery.toLowerCase())});
-                searchByBody = searchDirectory.filter(field => {return field.body.toLowerCase().match(state.searchQuery.toLowerCase())});
-                let middleArray = [...searchBySender, ...searchBySubject, ...searchByBody];
-                // if(middleArray.length>0) {
-                //     for(let i=0; i<middleArray.length; i++) {
-                //         if(!resultArray[].includes(middleArray[i].index)){
-                //             resultArray.push(middleArray[i])
-                //             console.log(resultArray[i].index)
-                //         }
-                //     }
-                // }
+                let searchBySender = searchDirectory.filter(field => {return field.from.toLowerCase().match(state.searchQuery.toLowerCase())});
+                let searchBySubject = searchDirectory.filter(field => {return field.subject.toLowerCase().match(state.searchQuery.toLowerCase())});
+                let middleArray = [...searchBySender, ...searchBySubject];
+      
                 state.searchResult = [...getUniqueArrayValues(middleArray)];
+                console.log(state.searchResult.length)
             } if(state.searchQuery.length===0) {
                 state.searchResult = [];
             }
@@ -117,7 +107,7 @@ const emailStorageSlice = createSlice({
         setCurrentFolder(state, action){
             /* 
                 folders: 
-                payload = 0 – filter by
+                payload = 0 – filter by ==== inbox
                 payload = 10 – inbox
                 payload = 20 – spam
                 payload = 30 – deleted
@@ -202,7 +192,7 @@ const emailStorageSlice = createSlice({
             if(spamTargetCount.length===0) {
                 state.spam.unshift(...state.currentEmail[0]);
             }
-            removeByAttr(state.inbox, 'index', targetIndex)
+            removeByAttr(state.inbox, 'index', targetIndex);
             state.currentEmailIndex=0;
             state.currentEmail=[];
 

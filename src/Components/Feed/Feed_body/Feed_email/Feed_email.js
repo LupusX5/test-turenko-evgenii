@@ -24,7 +24,6 @@ const Feed_email = ({from, time, subject, attachments, isRead, index}) => {
         }
     }
 
-
     const displayAttachmentsIcon = (arr) => {
       if(arr && arr.length>0){
         return <img className='feed_email__attachment' src={paperClip}/>
