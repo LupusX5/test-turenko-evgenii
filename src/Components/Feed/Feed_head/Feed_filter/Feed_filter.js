@@ -2,7 +2,6 @@ import React from 'react';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import './Feed_filter.css';
 import { setCurrentFolder, resetCurrentEmail } from '../../../../store/slices/emailStorageSlice';
 import { useDispatch } from 'react-redux';
 

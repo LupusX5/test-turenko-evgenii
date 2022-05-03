@@ -62,7 +62,7 @@ const Feed_body = () => {
     // mapping current array received from the state
     const mapper = (array) => {
       if(searchSearchResult.length===0 && searchQueryValue.length>0) {
-        return <div className='feed-email__alert'><span>No matches were found for the query:<strong>&nbsp;{searchQueryValue}</strong></span></div>
+        return <div className='feed-email__alert'><p className='feed-email__alert-text'>No matches were found for the query:<br/><span className='feed-email__alert-query'><strong>&nbsp;{searchQueryValue}</strong></span></p></div>
       }else
       if(array.length===0) {
         return <div className='feed-email__alert'>{getCurrentFolderName(emailStorageListCurrentFolder)} folder is empty</div>
