@@ -122,7 +122,7 @@ const Feed_email = ({from, time, subject, attachments, isRead, index, name}) => 
 
 
     return (
-      <div onClick={()=> {readMessage()}} id='feedEmailBasicBody' className={highlightCurrentEmail(index, emailIndex)}>
+      <div onClick={()=> {readMessage()}} className={highlightCurrentEmail(index, emailIndex)}>
           <div className='feed-email__inner'>
               <div className='feed-email__top feed-email__row'>
                   <div className='feed_email__from'>{name}</div>
