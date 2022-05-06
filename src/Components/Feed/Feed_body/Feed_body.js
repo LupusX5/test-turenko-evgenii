@@ -29,7 +29,7 @@ const Feed_body = () => {
                 20 – spam
                 30 – deleted
             */
-      if(folder === (0 || 10)) {
+      if(folder === 0 || folder ===  10) {
         return emailStorageListDefault;
       } else if(folder === 20) {
         return emailStorageListSpam;
@@ -48,7 +48,7 @@ const Feed_body = () => {
           20 – spam
           30 – deleted
       */
-  if(folder === (0 || 10)) {
+  if(folder === 0 || folder ===  10) {
     return 'Inbox';
   } else if(folder === 20) {
     return 'Spam';
